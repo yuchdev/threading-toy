@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
-project(timed_queue_functional_test CXX)
-set(TARGET timed_queue_functional_test)
+project(timed_queue_test_app CXX)
+set(TARGET timed_queue_test_app)
  
 cmake_policy(SET CMP0015 NEW)
 if(UNIX)
@@ -25,7 +25,7 @@ source_group("Sources" FILES ${SOURCES})
  
 ########################################################
 # include directories
-set(INCLUDE_DIRS ${INCLUDE_DIRS} . ../../include)
+set(INCLUDE_DIRS ${INCLUDE_DIRS} . ../include)
 include_directories(${INCLUDE_DIRS})
  
 ########################################################
