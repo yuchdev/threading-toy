@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-#include "timed_queue.h"
+#include "timed_queue/timed_queue.h"
  
 template <typename T>
 SharedQueue<T>& getSharedQueue(size_t queueSize){
