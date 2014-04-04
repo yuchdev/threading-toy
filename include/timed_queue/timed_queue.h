@@ -14,15 +14,16 @@
 template <typename T> 
 class SharedQueue
 {
-private:
-    // note: MSVC 11 does not support '= delete' notation
-    SharedQueue(const SharedQueue&);
-    SharedQueue& operator=(const SharedQueue&);
 public:
  
     /// Constructor.
     /// @param size Queue size.
     SharedQueue(size_t size):_counter(), _max_counter(size){}
+
+	// note: MSVC 11 does not support '= delete' notation
+	SharedQueue(const SharedQueue&) = delete;
+	SharedQueue& operator=(const SharedQueue&) = delete;
+
  
     /// Returns the number of elements contained in the Queue.        
     int count() const{
@@ -99,10 +100,17 @@ public:
     }
  
 private:
+	// Synchronisation
     std::condition_variable _cond;
     mutable std::mutex _mutex;
+
+	// Underlying container tor queue
     std::list< std::unique_ptr<T> > _queue;
+
+	// Atomic items counter
     std::atomic<size_t> _counter;
+
+	// Maximum size of the queue
     const size_t _max_counter;
 };
  
