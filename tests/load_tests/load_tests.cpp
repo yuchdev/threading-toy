@@ -8,12 +8,11 @@
 #include <boost/test/auto_unit_test.hpp>
 using namespace boost::unit_test;
  
- 
-BOOST_AUTO_TEST_SUITE(TimedQueuePerformanceTests);
 // Performance tests
 // Add timestamp to the item: fill at push, check at pop
 // Calculate min, max, middle, median
 // Two threads, one million packages, calculate push and pop misses
+BOOST_AUTO_TEST_SUITE(TimedQueuePerformanceTests);
  
 struct TimedObject
 {

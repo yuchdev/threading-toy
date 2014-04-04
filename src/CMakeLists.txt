@@ -15,10 +15,9 @@ elseif(WIN32)
 
 endif()
 
-
-set(BOOST_ROOT ${MY_BOOST_DIR}) 
-set(Boost_DEBUG OFF)
+set(Boost_DEBUG ON)
 set(Boost_USE_STATIC_LIBS ON)
+set(BOOST_ROOT ${MY_BOOST_DIR}) 
 
 find_package(Boost 1.55.0 COMPONENTS unit_test_framework REQUIRED) 
 

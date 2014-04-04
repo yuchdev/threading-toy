@@ -3,15 +3,9 @@
 #include "timed_queue/timed_queue.h"
  
  
- 
-
 // Load tests
-// Two threads, heavy package
+// Two threads, check input/output CRC
 ////////////////////////////////////////////////////
-// LOAD TESTS 1
-// TODO: functor
-////////////////////////////////////////////////////
-// LOAD TESTS 2
  
 struct HighLoadCheck
 {
