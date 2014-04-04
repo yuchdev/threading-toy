@@ -1,5 +1,6 @@
 #include <thread>
 #include <numeric>
+#include <iostream>
 #include "timed_queue/timed_queue.h"
  
 #define BOOST_AUTO_TEST_MAIN
@@ -117,6 +118,7 @@ BOOST_AUTO_TEST_CASE(Performance_Measure_Test)
 	std::thread t1(&PerformacnceTest::add_queue_values, &test, std::ref(q));
 	std::thread t2(&PerformacnceTest::read_queue_values, &test, std::ref(q));
 	std::cout << "Running " << queuePasses << " iterations..." << std::endl;
+	std::cout << "Performance measures..." << std::endl;
 	t1.join();
 	t2.join();
 	test.calculateStat();

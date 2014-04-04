@@ -1,5 +1,6 @@
 #include <thread>
 #include <numeric>
+#include <iostream>
 #include "timed_queue/timed_queue.h"
 
 #define BOOST_AUTO_TEST_MAIN
@@ -75,6 +76,7 @@ void testValuesConcurrently()
 BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count)
 {
 	SharedQueue<int> q(32);
+	std::cout << "Single-threaded tests..." << std::endl;
 	
 	// Check empty queue
 	BOOST_CHECK_EQUAL(q.count(), 0);
@@ -91,6 +93,7 @@ BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count)
 // Test concurrent push/pop
 BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count_Concurrently)
 {
+	std::cout << "Concurrent tests..." << std::endl;
 	testValuesConcurrently<int>();
 	testValuesConcurrently<long long>();
 	testValuesConcurrently<double>();
@@ -100,6 +103,7 @@ BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count_Concurrently)
 // Test push to the locked queue (maximum of elements)
 BOOST_AUTO_TEST_CASE(Push_Check_Count_Timed)
 {
+	std::cout << "Timed push test..." << std::endl;
 	typedef std::chrono::high_resolution_clock clock_t;
 	typedef std::chrono::milliseconds ms_t;
 	typedef std::chrono::duration<double> delta_t;
@@ -126,6 +130,7 @@ BOOST_AUTO_TEST_CASE(Push_Check_Count_Timed)
 // Test pop from the empty queue 
 BOOST_AUTO_TEST_CASE(Pop_Check_Count_Timed)
 {
+	std::cout << "Timed pop test..." << std::endl;
 	typedef std::chrono::high_resolution_clock clock_t;
 	typedef std::chrono::milliseconds ms_t;
 	typedef std::chrono::duration<double> delta_t;

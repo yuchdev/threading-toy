@@ -1,7 +1,13 @@
 #include <iostream>
 #include <thread>
 #include "timed_queue/timed_queue.h"
- 
+
+
+/////////////////////////////////////////////////////
+// The application illustrates SharedQueue<T> template class usage
+// That's not a test, just an example
+
+// Get 'Singleton' queue
 template <typename T>
 SharedQueue<T>& getSharedQueue(size_t queueSize){
     static SharedQueue<T> q(queueSize);
@@ -11,6 +17,7 @@ SharedQueue<T>& getSharedQueue(size_t queueSize){
 /////////////////////////////////////////////////////
 // TEST ITEMS
  
+// Example for placing object into the queue
 struct TestItem
 {
     TestItem(int i):_x(i), _y(rand()), _z(){};
@@ -19,7 +26,7 @@ struct TestItem
     double _z;
 };
  
- 
+// Large enough object for low-latency queue
 struct HeavyItem
 {
     HeavyItem(int i):_i(i),_array(){}
@@ -29,13 +36,15 @@ struct HeavyItem
  
  
 ////////////////////////////////////////////////////
-// LOAD TESTS 1
+// TESTS 1
+// Just create who high-loaded threads
 template <typename T>
 void add_queue_values(SharedQueue<T>& q){
     srand (static_cast<unsigned>(time(NULL)));
     int counter = 0;
     while (true)
     {
+		// output is not synchronized, just for debugging
         std::cout << ' ' << counter << '\n';
         T* i = new T( rand() );
         q.enqueue(i);
@@ -56,7 +65,9 @@ void read_queue_values(SharedQueue<T>& q){
 }
  
 ////////////////////////////////////////////////////
-// LOAD TESTS 2
+// TESTS 2
+// Create who high-loaded threads and out information about fails 
+// (both push or pop)
 template <typename T>
 void add_queue_values_timed(SharedQueue<T>& q){
     srand (static_cast<unsigned>(time(NULL)));

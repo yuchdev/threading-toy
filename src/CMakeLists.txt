@@ -4,6 +4,8 @@ set(TARGET timed_queue_test_app)
  
 cmake_policy(SET CMP0015 NEW)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin")
+
 if(UNIX)
 message("Unix")
   set(CMAKE_CXX_FLAGS "-std=c++11 -pthread")

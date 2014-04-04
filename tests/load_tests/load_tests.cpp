@@ -1,5 +1,6 @@
 #include <thread>
 #include <numeric>
+#include <iostream>
 #include "timed_queue/timed_queue.h"
  
 
@@ -62,6 +63,8 @@ BOOST_AUTO_TEST_CASE(Performance_Measure_Test)
 	const size_t queueSize = 128;
 	HighLoadCheck hlCheck(1000000);
 	SharedQueue<int> q(queueSize);
+	std::cout << "Running " << queuePasses << " iterations..." << std::endl;
+	std::cout << "Check input-output consistency on the high load..." << std::endl;
 	std::thread t1(&HighLoadCheck::pushTestValues, &hlCheck, std::ref(q));
 	std::thread t2(&HighLoadCheck::popTestValues, &hlCheck, std::ref(q));
 	t1.join();
