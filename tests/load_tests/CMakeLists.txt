@@ -37,7 +37,7 @@ source_group("Sources" FILES ${SOURCES})
  
 ########################################################
 # include directories
-set(INCLUDE_DIRS ${INCLUDE_DIRS} . ../include)
+set(INCLUDE_DIRS ${INCLUDE_DIRS} . ../../include)
 include_directories(${INCLUDE_DIRS})
  
 ########################################################

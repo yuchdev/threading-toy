@@ -20,8 +20,6 @@ using namespace boost::unit_test;
 * Empty the queue and wait pop for 1000 milliseconds
 */
  
-
- 
 BOOST_AUTO_TEST_SUITE(TimedQueueFunctionalTests);
  
 ///////////////////////////////////
@@ -89,7 +87,8 @@ BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count)
 	popTestValues(q, 2);
 	BOOST_CHECK_EQUAL(q.count(), 1);
 }
- 
+
+// Test concurrent push/pop
 BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count_Concurrently)
 {
 	testValuesConcurrently<int>();
@@ -97,7 +96,8 @@ BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count_Concurrently)
 	testValuesConcurrently<double>();
 	testValuesConcurrently<void*>();
 }
- 
+
+// Test push to the locked queue (maximum of elements)
 BOOST_AUTO_TEST_CASE(Push_Check_Count_Timed)
 {
 	typedef std::chrono::high_resolution_clock clock_t;
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_CASE(Push_Check_Count_Timed)
 	BOOST_REQUIRE_CLOSE( delta.count(), 1.0, 10.0);
 }
  
- 
+// Test pop from the empty queue 
 BOOST_AUTO_TEST_CASE(Pop_Check_Count_Timed)
 {
 	typedef std::chrono::high_resolution_clock clock_t;

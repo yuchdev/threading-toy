@@ -44,3 +44,4 @@ include_directories(${INCLUDE_DIRS})
  
 ########################################################
 add_executable(${TARGET} ${SOURCES})
+target_link_libraries(${TARGET} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
