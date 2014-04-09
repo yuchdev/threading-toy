@@ -58,7 +58,6 @@ public:
         }
         else
         {
-            _cond.notify_one();
             return false;
         }
  
@@ -94,7 +93,6 @@ public:
         }
         else
         {
-            _cond.notify_one();
             return nullptr;
         }
     }
