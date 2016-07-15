@@ -9,8 +9,8 @@
 
 // Get 'Singleton' queue
 template <typename T>
-SharedQueue<T>& getSharedQueue(size_t queueSize){
-    static SharedQueue<T> q(queueSize);
+TimedQueue<T>& getSharedQueue(size_t queueSize){
+    static TimedQueue<T> q(queueSize);
     return q;
 }
  
@@ -39,7 +39,7 @@ struct HeavyItem
 // TESTS 1
 // Just create who high-loaded threads
 template <typename T>
-void add_queue_values(SharedQueue<T>& q){
+void add_queue_values(TimedQueue<T>& q){
     srand (static_cast<unsigned>(time(NULL)));
     int counter = 0;
     while (true)
@@ -53,7 +53,7 @@ void add_queue_values(SharedQueue<T>& q){
 }
  
 template <typename T>
-void read_queue_values(SharedQueue<T>& q){
+void read_queue_values(TimedQueue<T>& q){
     int counter = 0;
     while (true)
     {
@@ -69,7 +69,7 @@ void read_queue_values(SharedQueue<T>& q){
 // Create who high-loaded threads and out information about fails 
 // (both push or pop)
 template <typename T>
-void add_queue_values_timed(SharedQueue<T>& q){
+void add_queue_values_timed(TimedQueue<T>& q){
     srand (static_cast<unsigned>(time(NULL)));
     int counter = 0;
     while (true)
@@ -83,7 +83,7 @@ void add_queue_values_timed(SharedQueue<T>& q){
 }
  
 template <typename T>
-void read_queue_values_timed(SharedQueue<T>& q){
+void read_queue_values_timed(TimedQueue<T>& q){
     int counter = 0;
     while (true)
     {
@@ -98,7 +98,7 @@ void read_queue_values_timed(SharedQueue<T>& q){
  
 template <typename T>
 void testQueueBasic(size_t queueSize){
-    SharedQueue<T>& q = getSharedQueue<T>(queueSize);
+    TimedQueue<T>& q = getSharedQueue<T>(queueSize);
     std::thread t1(add_queue_values<T>, std::ref(q));
     std::thread t2(read_queue_values<T>, std::ref(q));
     t1.join();
@@ -107,7 +107,7 @@ void testQueueBasic(size_t queueSize){
  
 template <typename T>
 void testQueueTimed(size_t queueSize){
-    SharedQueue<T>& q = getSharedQueue<T>(queueSize);
+    TimedQueue<T>& q = getSharedQueue<T>(queueSize);
     std::thread t1(add_queue_values_timed<T>, std::ref(q));
     std::thread t2(read_queue_values_timed<T>, std::ref(q));
     t1.join();

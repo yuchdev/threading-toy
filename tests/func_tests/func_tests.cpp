@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_SUITE(TimedQueueFunctionalTests);
  
 /// Testing single-threaded push
 template <typename T>
-void pushTestValues(SharedQueue<T>& q, size_t count)
+void pushTestValues(TimedQueue<T>& q, size_t count)
 {
 	srand(static_cast<unsigned>(time(NULL)));
 	for (size_t i = 0; i < count; ++i)
@@ -40,7 +40,7 @@ void pushTestValues(SharedQueue<T>& q, size_t count)
  
 /// Testing single-threaded pop
 template <typename T>
-void popTestValues(SharedQueue<T>& q, size_t count)
+void popTestValues(TimedQueue<T>& q, size_t count)
 {
 	for (size_t i = 0; i < count; ++i)
 	{
@@ -53,7 +53,7 @@ void popTestValues(SharedQueue<T>& q, size_t count)
 template <typename T>
 void testValuesConcurrently()
 {
-	SharedQueue<int> q(32);
+	TimedQueue<int> q(32);
 	BOOST_CHECK_EQUAL(q.count(), 0);
  
 	std::thread t1(pushTestValues<int>, std::ref(q), 3);
@@ -75,7 +75,7 @@ void testValuesConcurrently()
 /// Testing single-threaded push
 BOOST_AUTO_TEST_CASE(Push_Pop_Check_Count)
 {
-	SharedQueue<int> q(32);
+	TimedQueue<int> q(32);
 	std::cout << "Single-threaded tests..." << std::endl;
 	
 	// Check empty queue
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(Push_Check_Count_Timed)
  
 	// create empty queue
 	const size_t queueSize = 128;
-	SharedQueue<int> q(queueSize);
+	TimedQueue<int> q(queueSize);
 	BOOST_CHECK_EQUAL(q.count(), 0);
  
 	// fill it completely
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(Pop_Check_Count_Timed)
 	typedef std::chrono::duration<double> delta_t;
  
 	const size_t queueSize = 128;
-	SharedQueue<int> q(queueSize);
+	TimedQueue<int> q(queueSize);
 	auto t0 = clock_t::now();
 	int* item = q.dequeue(1000);
 	int* zero = nullptr;

@@ -12,17 +12,18 @@
 /// Thread-safe fixed-size shared queue with low 'empty queue' latency.
 /// @note The queue 'owns' the elements that it contains.
 template <typename T> 
-class SharedQueue
+class TimedQueue
 {
 public:
  
     /// Constructor.
     /// @param size Queue size.
-    SharedQueue(size_t size):_counter(), _max_counter(size){}
+    TimedQueue(size_t size):_counter(), _max_counter(size){}
 
-	// note: MSVC 11 does not support '= delete' notation
-	SharedQueue(const SharedQueue&) = delete;
-	SharedQueue& operator=(const SharedQueue&) = delete;
+	TimedQueue(const TimedQueue&) = delete;
+	TimedQueue& operator=(const TimedQueue&) = delete;
+    TimedQueue(TimedQueue&&) = delete;
+    TimedQueue& operator=(TimedQueue&&) = delete;
 
  
     /// Returns the number of elements contained in the Queue.        
@@ -45,7 +46,7 @@ public:
     /// @param millisecondsTimeout Numbers of milliseconds to wait.
     /// @return 'true' if the operation was completed successfully, 'false' if the operation timed out.
     /// @note if the queue is full then this method blocks until there is the room for the item again or the operation timed out.
-    bool enqueue(T* item, unsigned millisecondsTimeout){
+    bool try_enqueue(T* item, unsigned millisecondsTimeout){
         std::unique_lock<std::mutex> l(_mutex);
         if( _cond.wait_for( l, 
             std::chrono::milliseconds(millisecondsTimeout),
@@ -79,7 +80,7 @@ public:
     /// @param millisecondsTimeout Numbers of milliseconds to wait.
     /// @returns The item at the betting of the Queue or NULL if the operation timed out.	
     /// @note if the queue is empty then this method blocks until there is an item again or the operation timed out.
-	T* dequeue(unsigned millisecondsTimeout){
+	T* try_enqueue(unsigned millisecondsTimeout){
         std::unique_lock<std::mutex> l(_mutex);
         if( _cond.wait_for( l, 
             std::chrono::milliseconds(millisecondsTimeout),
@@ -98,7 +99,7 @@ public:
     }
  
 private:
-	// Synchronisation
+	// Synchronization
     std::condition_variable _cond;
     mutable std::mutex _mutex;
 

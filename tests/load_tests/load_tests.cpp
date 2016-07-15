@@ -19,7 +19,7 @@ struct HighLoadCheck
 	HighLoadCheck(size_t passes) :_passes(passes), _control_push(), _control_pop(){}
 
 	/// Testing push to the queue under heavy load
-	void pushTestValues(SharedQueue<int>& q)
+	void pushTestValues(TimedQueue<int>& q)
 	{
 		srand(static_cast<unsigned>(time(NULL)));
 		for (size_t i = 0; i < _passes; ++i)
@@ -31,7 +31,7 @@ struct HighLoadCheck
 	}
 
 	/// Testing pop from the queue under heavy load
-	void popTestValues(SharedQueue<int>& q)
+	void popTestValues(TimedQueue<int>& q)
 	{
 		for (size_t i = 0; i < _passes; ++i)
 		{
@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(Performance_Measure_Test)
 	const size_t queuePasses = 1000000;
 	const size_t queueSize = 128;
 	HighLoadCheck hlCheck(1000000);
-	SharedQueue<int> q(queueSize);
+	TimedQueue<int> q(queueSize);
 	std::cout << "Running " << queuePasses << " iterations..." << std::endl;
 	std::cout << "Check input-output consistency on the high load..." << std::endl;
 	std::thread t1(&HighLoadCheck::pushTestValues, &hlCheck, std::ref(q));

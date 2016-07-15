@@ -40,7 +40,7 @@ struct PerformacnceTest
 		_delays.reserve(_passes);
 	}
 
-	void add_queue_values(SharedQueue<TimedObject>& q)
+	void add_queue_values(TimedQueue<TimedObject>& q)
 	{
 		for (size_t i = 0; i < _passes; ++i)
 		{
@@ -48,7 +48,7 @@ struct PerformacnceTest
 		}
 	}
 
-	void read_queue_values(SharedQueue<TimedObject>& q){
+	void read_queue_values(TimedQueue<TimedObject>& q){
 		for (size_t i = 0; i < _passes; ++i)
 		{
 			TimedObject* tmo = q.dequeue();
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_CASE(Performance_Measure_Test)
 {
 	const size_t queueSize = 1;
 	const size_t queuePasses = 1000000;
-	SharedQueue<TimedObject> q(queueSize);
+	TimedQueue<TimedObject> q(queueSize);
 	PerformacnceTest test(queuePasses);
 	std::thread t1(&PerformacnceTest::add_queue_values, &test, std::ref(q));
 	std::thread t2(&PerformacnceTest::read_queue_values, &test, std::ref(q));
