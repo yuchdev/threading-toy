@@ -5,12 +5,12 @@ set(TARGET timed_queue_load_test)
 cmake_policy(SET CMP0015 NEW)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../bin")
- 
+find_package(Boost ${BOOST_MIN_VERSION} COMPONENTS unit_test REQUIRED) 
 file(GLOB SOURCES *.cpp ../../include/threading_toy/*.h) 
   
 ########################################################
 # include directories
-set(INCLUDE_DIRS ${INCLUDE_DIRS} . ../../include)
+set(INCLUDE_DIRS ${INCLUDE_DIRS} ${Boost_INCLUDE_DIRS}  . ../../include)
 include_directories(${INCLUDE_DIRS})
  
 ########################################################

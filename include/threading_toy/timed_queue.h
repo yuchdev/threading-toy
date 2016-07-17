@@ -46,7 +46,7 @@ public:
     /// @param millisecondsTimeout Numbers of milliseconds to wait.
     /// @return 'true' if the operation was completed successfully, 'false' if the operation timed out.
     /// @note if the queue is full then this method blocks until there is the room for the item again or the operation timed out.
-    bool try_enqueue(T* item, unsigned millisecondsTimeout){
+    bool enqueue(T* item, unsigned millisecondsTimeout){
         std::unique_lock<std::mutex> l(_mutex);
         if( _cond.wait_for( l, 
             std::chrono::milliseconds(millisecondsTimeout),
@@ -80,7 +80,7 @@ public:
     /// @param millisecondsTimeout Numbers of milliseconds to wait.
     /// @returns The item at the betting of the Queue or NULL if the operation timed out.	
     /// @note if the queue is empty then this method blocks until there is an item again or the operation timed out.
-	T* try_enqueue(unsigned millisecondsTimeout){
+	T* dequeue(unsigned millisecondsTimeout){
         std::unique_lock<std::mutex> l(_mutex);
         if( _cond.wait_for( l, 
             std::chrono::milliseconds(millisecondsTimeout),

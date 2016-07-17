@@ -1,7 +1,7 @@
 #include <thread>
 #include <numeric>
 #include <iostream>
-#include "timed_queue/timed_queue.h"
+#include <threading_toy/timed_queue.h>
  
 
 #define BOOST_AUTO_TEST_MAIN

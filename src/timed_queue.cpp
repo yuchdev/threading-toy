@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-#include "timed_queue/timed_queue.h"
+#include <threading_toy/timed_queue.h>
 
 
 /////////////////////////////////////////////////////
