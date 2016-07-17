@@ -20,8 +20,8 @@ public:
     /// @param size Queue size.
     TimedQueue(size_t size):_counter(), _max_counter(size){}
 
-	TimedQueue(const TimedQueue&) = delete;
-	TimedQueue& operator=(const TimedQueue&) = delete;
+    TimedQueue(const TimedQueue&) = delete;
+    TimedQueue& operator=(const TimedQueue&) = delete;
     TimedQueue(TimedQueue&&) = delete;
     TimedQueue& operator=(TimedQueue&&) = delete;
 
